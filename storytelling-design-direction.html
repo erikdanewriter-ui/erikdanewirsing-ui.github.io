@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Storytelling &amp; Design Direction — Pen &amp; Paintbrush</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--ink:#0c0b09;--paper:#f4f0e8;--warm:#e8e0cc;--accent:#c8a96e;--muted:#8a8070;--rule:#d4cdc0;}
+    html{font-size:16px;scroll-behavior:smooth;}
+    body{background:var(--paper);color:var(--ink);font-family:'Syne',sans-serif;-webkit-font-smoothing:antialiased;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 3rem;background:var(--paper);border-bottom:1px solid var(--rule);}
+    .nav-brand{font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--ink);}
+    .nav-links a.active{color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:2px;}
+
+    .page-hero{padding-top:6rem;min-height:48vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--ink) 0%,#1e1c18 55%,#2e2b24 100%);position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 80% 50%,rgba(200,169,110,.07) 0%,transparent 65%);}
+    .page-hero-inner{position:relative;z-index:1;padding:4rem 3rem;max-width:1200px;margin:0 auto;width:100%;}
+    .page-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;}
+    .page-hero h1{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(2.6rem,5.5vw,5rem);line-height:1.05;letter-spacing:-.02em;color:var(--paper);margin-bottom:1.75rem;}
+    .page-hero-desc{font-size:.975rem;font-weight:400;line-height:1.85;color:rgba(244,240,232,.6);max-width:50ch;}
+
+    main{padding:0 0 7rem;}
+    .work-section{padding:5rem 3rem 0;max-width:1200px;margin:0 auto;}
+    .section-header{display:flex;align-items:baseline;gap:1.5rem;border-bottom:1px solid var(--rule);padding-bottom:1rem;margin-bottom:3rem;}
+    .section-label{font-size:.6rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);white-space:nowrap;}
+    .section-title{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(1.5rem,2.8vw,2.2rem);color:var(--ink);line-height:1;}
+
+    .video-placeholder{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:linear-gradient(135deg,#1a1815 0%,#2a2620 50%,#1a1815 100%);cursor:pointer;background-size:cover;background-position:center;}
+    .ph-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,.88) 0%,rgba(12,11,9,.3) 55%,transparent 100%);}
+    .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);z-index:3;width:3.5rem;height:3.5rem;border-radius:50%;background:var(--accent);border:none;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;padding-left:3px;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+    .video-placeholder:hover .play-btn{transform:translate(-50%,-60%) scale(1.1);background:var(--paper);}
+    .video-active{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink);}
+    .video-active iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+
+    .card-meta{padding:1rem 1.25rem 1.25rem;border:1px solid var(--rule);border-top:0;background:var(--paper);}
+    .card-client{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.3rem;}
+    .card-title{font-family:'Cormorant',serif;font-weight:400;font-size:1.05rem;color:var(--ink);line-height:1.3;}
+
+    .carousel-outer{padding:0 3rem;}
+    .carousel-track-wrap{overflow:hidden;}
+    .carousel-track{display:flex;gap:1.5rem;transition:transform .4s cubic-bezier(.4,0,.2,1);}
+    .carousel-card{flex:0 0 calc(33.333% - 1rem);min-width:0;border:1px solid var(--rule);background:var(--paper);}
+    .carousel-card .card-meta{border:0;border-top:1px solid var(--rule);}
+    .carousel-controls{display:flex;align-items:center;justify-content:center;gap:1.5rem;padding:1.75rem 3rem 0;}
+    .carousel-btn{width:3rem;height:3rem;border:1px solid var(--rule);background:var(--paper);cursor:pointer;font-size:1.25rem;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;}
+    .carousel-btn:hover{background:var(--ink);color:var(--paper);}
+    .carousel-btn:disabled{opacity:.3;cursor:default;}
+    .carousel-counter{font-size:.65rem;font-weight:600;letter-spacing:.1em;color:var(--muted);}
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+    .grid-card{border:1px solid var(--rule);}
+    .grid-card .card-meta{border:0;border-top:1px solid var(--rule);}
+
+    .featured-card{border:1px solid var(--rule);}
+    .featured-card .card-meta{border:0;border-top:1px solid var(--rule);padding:1.25rem 1.75rem 1.5rem;display:flex;gap:3rem;align-items:baseline;}
+    .featured-card .card-title{font-size:1.2rem;}
+
+
+    .section-divider{max-width:1200px;margin:5rem auto 0;padding:0 3rem;border-top:1px solid var(--rule);}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="index.html">Pen &amp; Paintbrush | Erik Wirsing Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="content-copywriting.html">Content &amp; Copywriting</a></li>
+      <li><a href="storytelling-design-direction.html" class="active">Storytelling &amp; Design Direction</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">The Paintbrush</p>
+      <h1>Storytelling &amp; Design Direction</h1>
+      <p class="page-hero-desc">Cross-functional creative leadership—shaping narratives, directing visual language, and building the conceptual architecture behind launches and campaigns.</p>
+    </div>
+  </section>
+
+  <main>
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">01</span>
+        <h2 class="section-title">Keynotes &amp; Thought Leadership</h2>
+      </div>
+    </div>
+    <div class="carousel-outer">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="keynoteTrack">
+        <div class="carousel-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175940071?h=19fcce71ff&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/ANA_Nav_preso_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+          <div class="card-meta">
+            <span class="card-client">Palo Alto Networks × ANA</span>
+            <h3 class="card-title">Association of National Advertisers, Navneet Singh, VP Marketing</h3>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175944364?h=100212df66&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_Zander_Stack_side_by_side_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+          <div class="card-meta">
+            <span class="card-client">Microsoft</span>
+            <h3 class="card-title">Microsoft Executive Keynotes — Russinovich, Zander</h3>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175946453?h=00b87dd62b&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/Nav_TL_PMM_Summit_preso_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+          <div class="card-meta">
+            <span class="card-client">Palo Alto Networks</span>
+            <h3 class="card-title">Product Marketing Summit AI Keynote, Navneet Singh, VP</h3>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175947143?h=9d148b69fa&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_AI_UNIT_42_decks_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+          <div class="card-meta">
+            <span class="card-client">Palo Alto Networks</span>
+            <h3 class="card-title">Palo Alto Networks AI and Unit 42 Executive Presentations</h3>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175948219?h=e9df104d35&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_CMO_TL_preso_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+          <div class="card-meta">
+            <span class="card-client">Palo Alto Networks</span>
+            <h3 class="card-title">Executive Presentation, Unni KP, CMO</h3>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175950566?h=523164d38a&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/Path_Steve_TL_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+          <div class="card-meta">
+            <span class="card-client">Pathfinder</span>
+            <h3 class="card-title">Steve Davis, CEO — Path TED Talk</h3>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175952539?h=3589107291&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VMWA_Nikkei_preso_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+          <div class="card-meta">
+            <span class="card-client">VMware</span>
+            <h3 class="card-title">VMware Cloud Days Executive Presentation</h3>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <span class="carousel-counter" id="keynoteCounter">1&ndash;3 of 7</span>
+      <button class="carousel-btn" id="keynotePrev" disabled>&#8592;</button>
+      <button class="carousel-btn" id="keynoteNext">&#8594;</button>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">02</span>
+        <h2 class="section-title">Winning Pitches</h2>
+      </div>
+      <div class="grid-2">      <div class="grid-card">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175952921?h=05146695ef&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_4_SaaS_security_preso_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Palo Alto Networks</span>
+          <h3 class="card-title">Palo Alto Networks SaaS Security Sales Presentation</h3>
+        </div>
+      </div>      <div class="grid-card">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175949213?h=e6efc90632&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_Future_SecOps_deck_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Palo Alto Networks</span>
+          <h3 class="card-title">Palo Alto Networks Future of SecOps Sales Presentation</h3>
+        </div>
+      </div>      <div class="grid-card">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175944063?h=ee6d81bd72&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_Security_Ignite_deck_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Microsoft</span>
+          <h3 class="card-title">Microsoft Security Ignite Keynote</h3>
+        </div>
+      </div>      <div class="grid-card">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175942493?h=260ab10892&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/ELAS_GoogleCloud_Better_Together_deck_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Elastic × Google Cloud</span>
+          <h3 class="card-title">Elastic Google Cloud Better Together Presentation</h3>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">03</span>
+        <h2 class="section-title">Presentation Systems</h2>
+      </div>
+      <div class="featured-card">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175943744?h=40dc53af9a&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_Azure_Ded_presentation_system_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Microsoft</span>
+          <h3 class="card-title">Microsoft Azure Dedicated Presentation System</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">04</span>
+        <h2 class="section-title">Corporate Storytelling</h2>
+      </div>
+      <div class="featured-card">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175943912?h=1a0aa7a97b&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_Growth_mindset_catalog_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Microsoft</span>
+          <h3 class="card-title">Microsoft Growth Mindset &amp; Culture Campaign</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">05</span>
+        <h2 class="section-title">Workshops</h2>
+      </div>
+      <div class="featured-card">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175943795?h=b8ac844f67&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_Azure_Security_workshop_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Microsoft</span>
+          <h3 class="card-title">Microsoft Azure Security Workshop</h3>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+  // Click-to-play for all video placeholders
+  document.querySelectorAll('.video-placeholder').forEach(function(el) {
+    el.addEventListener('click', function() {
+      window._carouselStop && window._carouselStop();
+      var wrap = document.createElement('div');
+      wrap.className = 'video-active';
+      var iframe = document.createElement('iframe');
+      iframe.src = el.dataset.src;
+      iframe.setAttribute('frameborder','0');
+      iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+      iframe.setAttribute('allowfullscreen','');
+      iframe.addEventListener('load', function() {
+        iframe.contentWindow.postMessage(JSON.stringify({method: 'addEventListener', value: 'pause'}), 'https://player.vimeo.com');
+        iframe.contentWindow.postMessage(JSON.stringify({method: 'addEventListener', value: 'ended'}), 'https://player.vimeo.com');
+      });
+      wrap.appendChild(iframe);
+      el.replaceWith(wrap);
+    });
+  });
+
+  // Carousel — all state lives here so start/stop can access it
+  (function() {
+    var track   = document.getElementById('keynoteTrack');
+    var prev    = document.getElementById('keynotePrev');
+    var next    = document.getElementById('keynoteNext');
+    var counter = document.getElementById('keynoteCounter');
+    var cards   = Array.from(track.querySelectorAll('.carousel-card'));
+    var total   = cards.length;
+    var visible = 3;
+    var cur     = 0;
+    var timer   = null;
+
+    function cw() { return cards[0].offsetWidth + 24; }
+    function update() {
+      track.style.transform = 'translateX(-' + (cur * cw()) + 'px)';
+      counter.innerHTML = (cur+1) + '&ndash;' + Math.min(cur+visible,total) + ' of ' + total;
+      prev.disabled = cur === 0;
+      next.disabled = cur >= total - visible;
+    }
+
+    function start() {
+      clearInterval(timer);
+      timer = setInterval(function() {
+        if (cur >= total - visible) { cur = 0; } else { cur++; }
+        update();
+      }, 4000);
+    }
+
+    function stop() { clearInterval(timer); }
+
+    // Expose stop to the click handlers above
+    window._carouselStop  = stop;
+    window._carouselStart = start;
+
+    prev.addEventListener('click', function() { if(cur>0){cur--;update();} });
+    next.addEventListener('click', function() { if(cur<total-visible){cur++;update();} });
+    update();
+    start();
+  })();
+
+  // Resume carousel only when Vimeo video finishes (not on pause, which fires spuriously on autoplay block)
+  window.addEventListener('message', function(e) {
+    if (e.origin !== 'https://player.vimeo.com') return;
+    try {
+      var data = JSON.parse(e.data);
+      if (data.event === 'ended') {
+        window._carouselStart && window._carouselStart();
+      }
+    } catch(err) {}
+  });
+  </script>
+
+</body>
+</html>
