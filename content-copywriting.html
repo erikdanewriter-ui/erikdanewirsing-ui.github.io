@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content &amp; Copywriting â€” Pen &amp; Paintbrush</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--ink:#0c0b09;--paper:#f4f0e8;--warm:#e8e0cc;--accent:#c8a96e;--muted:#8a8070;--rule:#d4cdc0;}
+    html{font-size:16px;scroll-behavior:smooth;}
+    body{background:var(--paper);color:var(--ink);font-family:'Syne',sans-serif;-webkit-font-smoothing:antialiased;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 3rem;background:var(--paper);border-bottom:1px solid var(--rule);}
+    .nav-brand{font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--ink);}
+    .nav-links a.active{color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:2px;}
+
+    .page-hero{padding-top:6rem;min-height:48vh;display:flex;align-items:center;background:linear-gradient(135deg,var(--ink) 0%,#1e1c18 55%,#2e2b24 100%);position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 80% 50%,rgba(200,169,110,.07) 0%,transparent 65%);}
+    .page-hero-inner{position:relative;z-index:1;padding:4rem 3rem;max-width:1200px;margin:0 auto;width:100%;}
+    .page-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;}
+    .page-hero h1{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(2.6rem,5.5vw,5rem);line-height:1.05;letter-spacing:-.02em;color:var(--paper);margin-bottom:1.75rem;}
+    .page-hero-desc{font-size:.975rem;font-weight:400;line-height:1.85;color:rgba(244,240,232,.6);max-width:50ch;}
+
+    main{padding:0 0 7rem;}
+    .work-section{padding:5rem 3rem 0;max-width:1200px;margin:0 auto;}
+    .section-header{display:flex;align-items:baseline;gap:1.5rem;border-bottom:1px solid var(--rule);padding-bottom:1rem;margin-bottom:3rem;}
+    .section-label{font-size:.6rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);white-space:nowrap;}
+    .section-title{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(1.5rem,2.8vw,2.2rem);color:var(--ink);line-height:1;}
+
+    /* â”€â”€ video cards â”€â”€ */
+    .video-placeholder{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:linear-gradient(135deg,#1a1815 0%,#2a2620 50%,#1a1815 100%);cursor:pointer;background-size:cover;background-position:center;}
+    .ph-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,.88) 0%,rgba(12,11,9,.3) 55%,transparent 100%);}
+    .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);z-index:3;width:3.5rem;height:3.5rem;border-radius:50%;background:var(--accent);border:none;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;padding-left:3px;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+    .video-placeholder:hover .play-btn{transform:translate(-50%,-60%) scale(1.1);background:var(--paper);}
+    .video-active{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink);}
+    .video-active iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+
+    /* â”€â”€ static image cards â”€â”€ */
+    .img-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;cursor:pointer;background:var(--warm);}
+    .img-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .35s;}
+    .expand-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%) scale(0);z-index:3;width:3.5rem;height:3.5rem;border-radius:50%;background:var(--accent);border:none;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+    .static-item:hover .expand-btn{transform:translate(-50%,-60%) scale(1);}
+    .static-item:hover .img-wrap img{transform:scale(1.03);}
+
+    /* â”€â”€ card meta â”€â”€ */
+    .card-meta{padding:1rem 1.25rem 1.25rem;border:1px solid var(--rule);border-top:0;background:var(--paper);}
+    .card-client{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.3rem;}
+    .card-title{font-family:'Cormorant',serif;font-weight:400;font-size:1.05rem;color:var(--ink);line-height:1.3;}
+
+    /* â”€â”€ carousel â”€â”€ */
+    .carousel-outer{padding:0 3rem;}
+    .carousel-track-wrap{overflow:hidden;}
+    .carousel-track{display:flex;gap:1.5rem;transition:transform .4s cubic-bezier(.4,0,.2,1);}
+    .carousel-card{flex:0 0 calc(33.333% - 1rem);min-width:0;border:1px solid var(--rule);}
+    .carousel-card .card-meta{border:0;border-top:1px solid var(--rule);}
+    .carousel-controls{display:flex;align-items:center;justify-content:center;gap:1.5rem;padding:1.75rem 3rem 0;}
+    .carousel-btn{width:3rem;height:3rem;border:1px solid var(--rule);background:var(--paper);cursor:pointer;font-size:1.25rem;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;}
+    .carousel-btn:hover{background:var(--ink);color:var(--paper);}
+    .carousel-btn:disabled{opacity:.3;cursor:default;}
+    .carousel-counter{font-size:.65rem;font-weight:600;letter-spacing:.1em;color:var(--muted);}
+
+    /* â”€â”€ grid (web section) â”€â”€ */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .grid-card{border:1px solid var(--rule);}
+    .grid-card .card-meta{border:0;border-top:1px solid var(--rule);}
+
+    .section-divider{max-width:1200px;margin:5rem auto 0;padding:0 3rem;border-top:1px solid var(--rule);}
+
+    /* â”€â”€ lightbox â”€â”€ */
+    .lightbox-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(12,11,9,.92);align-items:center;justify-content:center;padding:2rem;}
+    .lightbox-overlay.open{display:flex;}
+    .lightbox-box{position:relative;max-width:92vw;width:100%;background:var(--paper);border:1px solid var(--rule);}
+    .lightbox-img{width:100%;height:auto;display:block;max-height:82vh;object-fit:contain;}
+    .lightbox-caption{padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);}
+    .lightbox-title{font-family:'Cormorant',serif;font-size:1.25rem;color:var(--ink);letter-spacing:.01em;}
+    .lightbox-client{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);}
+    .lightbox-close{position:absolute;top:-1.25rem;right:-1.25rem;width:2.5rem;height:2.5rem;border-radius:50%;background:var(--ink);color:var(--paper);border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .lightbox-close:hover{background:var(--accent);}
+
+    @media(max-width:900px){.grid-3{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:580px){.carousel-card{flex:0 0 calc(100% - 0px);}.grid-3{grid-template-columns:1fr;}.nav-links{gap:1.25rem;}.work-section,.carousel-outer{padding-left:1.5rem;padding-right:1.5rem;}.page-hero-inner{padding:3rem 1.5rem;}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="index.html">Pen &amp; Paintbrush | Erik Wirsing Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="content-copywriting.html" class="active">Content &amp; Copywriting</a></li>
+      <li><a href="storytelling-design-direction.html">Storytelling &amp; Design Direction</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">The Pen</p>
+      <h1>Content &amp; Copywriting</h1>
+      <p class="page-hero-desc">Enterprise go-to-market, brand communications, executive narratives, and product content that translates strategy into language audiences act on.</p>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         01  Â·  eBOOKS
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">01</span>
+        <h2 class="section-title">eBooks</h2>
+      </div>
+    </div>
+    <div class="carousel-outer">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="ebookTrack">
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/AWS_Salesforce_ebook.jpg" alt="AWS Salesforce Partnership eBook" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Amazon Web Services &times; Salesforce</span>
+              <h3 class="card-title">AWS Salesforce Partnership eBook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175941559?h=8a18080962&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/AWS_EA_account_guide_ebook_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Amazon Web Services &times; EA</span>
+              <h3 class="card-title">AWS and Electronic Arts Account Guide eBook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175941574?h=7385f79899&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/AWS_Siemens_ebook_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Amazon Web Services &times; Siemens</span>
+              <h3 class="card-title">AWS Siemens partnership eBook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175941619?h=b4d6f240c2&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/AWS_sustainability_redo-1_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Amazon Web Services</span>
+              <h3 class="card-title">AWS Sustainability eBook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175950829?h=ec6147f233&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VEEAM_Sophos_ebook_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Veeam &times; Sophos</span>
+              <h3 class="card-title">Veeam Sophos partnership eBook</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/VEEAM_MSFT_ebook.jpg" alt="Veeam Microsoft eBook" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Veeam &times; Microsoft</span>
+              <h3 class="card-title">Veeam Microsoft eBook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175951715?h=7ce9288e17&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VEEV_DT_pathways_ebook_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Veeva</span>
+              <h3 class="card-title">Veeva Digital Transformation Pathways eBook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175940301?h=e6d6d45f7a&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/Atla_software_ebook_BOM_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Atlassian</span>
+              <h3 class="card-title">The New Engineering Workflow &#8212; Ship better software, faster, with Atlassian&#8217;s System of Work eBook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175942419?h=a2188ed517&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/ELAS_AWS_ebook_infographic_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Elastic &times; AWS</span>
+              <h3 class="card-title">Elastic AWS partnership eBook</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/PANW_Cybersecurity_consildation_ebook.jpg" alt="Palo Alto Networks Cybersecurity Consolidation eBook" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks Cybersecurity Consolidation eBook</h3>
+            </div>
+          </div>
+
+        </div><!-- /ebookTrack -->
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="ebookPrev" aria-label="Previous">&#8592;</button>
+      <span class="carousel-counter" id="ebookCounter"></span>
+      <button class="carousel-btn" id="ebookNext" aria-label="Next">&#8594;</button>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         02  Â·  REPORTS, BRIEFS & PRESENTATIONS
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="section-divider"></div>
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">02</span>
+        <h2 class="section-title">Reports, Briefs &amp; Presentations</h2>
+      </div>
+    </div>
+    <div class="carousel-outer">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="reportTrack">
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175943699?h=c4eaa8e0fb&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_AI_healthcare_report_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft AI in Healthcare Report</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/MSFT_AI_Transformation_Playbook.jpg" alt="Microsoft AI Transformation Playbook" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft AI Transformation Playbook</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/MSFT_Agentic_AI_playbook.jpg" alt="Microsoft Agentic AI Playbook" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft Agentic AI Playbook</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175944213?h=dfbde90d5f&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_state_of_AI_report_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft State of AI Report</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/MSFT_AI_COE_deck.jpg" alt="Microsoft AI Center of Excellence Deck" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft AI Center of Excellence Deck</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175951808?h=9787c50c8a&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VEEV_Trust_report_preso_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Veeva</span>
+              <h3 class="card-title">Veeva Annual Trust Report | CPG, Food &amp; Beverage</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/2023-2024 DEI reports.jpg" alt="2023-2024 DEI Reports" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">2023&#8211;2024 Diversity, Equity &amp; Inclusion Reports</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175949402?h=beca6a9e29&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_Prisma_AIRS_deck_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks Prisma AIRS sales presentation</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/PANW_InterSECt__preso.jpg" alt="Palo Alto Networks InterSECt Presentation" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks InterSECt Presentation</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175950802?h=8611ea90d2&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VEEAM_Microsoft_brief_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Veeam &times; Microsoft</span>
+              <h3 class="card-title">Veeam Microsoft partnership brief</h3>
+            </div>
+          </div>
+
+        </div><!-- /reportTrack -->
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="reportPrev" aria-label="Previous">&#8592;</button>
+      <span class="carousel-counter" id="reportCounter"></span>
+      <button class="carousel-btn" id="reportNext" aria-label="Next">&#8594;</button>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         03  Â·  CAMPAIGNS & BOMs
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="section-divider"></div>
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">03</span>
+        <h2 class="section-title">Campaigns &amp; Bills of Materials</h2>
+      </div>
+    </div>
+    <div class="carousel-outer">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="campaignTrack">
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175948612?h=34f9bd4c8a&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_customer_advocacy_program_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks Customer Advocacy Program</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/PANW_case-study_program.jpg" alt="Palo Alto Networks Case Study Program" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks Case Study Program</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/PANW_case-studies.jpg" alt="Palo Alto Networks Case Studies" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks Case Studies</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/PANW_case_studies.jpg" alt="Palo Alto Networks Case Studies Collection" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks Case Studies Collection</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175949474?h=36b81b6654&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_SASE_campaign_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks SASE campaign</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175949252?h=4f3ba212ad&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_OT_demand_gen_BOM_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks OT &#8212; IT campaign BOM</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175947213?h=c2ef631f53&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_campaign_BOM_social_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Palo Alto Networks</span>
+              <h3 class="card-title">Palo Alto Networks campaign BOM + social</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/ATLA_use_cases.jpg" alt="Atlassian Use Cases" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Atlassian</span>
+              <h3 class="card-title">Atlassian Use Cases</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175940272?h=34806ebc77&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/ATLA_champion_packs_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Atlassian</span>
+              <h3 class="card-title">Atlassian Champion Packs</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/AWS_Federal messaging guides.jpg" alt="AWS Federal Messaging Guides" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Amazon Web Services</span>
+              <h3 class="card-title">AWS Federal Messaging Guides</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/AWS_case_study.jpg" alt="AWS Case Study" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Amazon Web Services</span>
+              <h3 class="card-title">AWS Case Study</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175943862?h=2dcfd98046&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_data_sovereignty_messaging_and_deck_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft Data Sovereignty messaging and deck</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175944335?h=9e30581001&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_Teams_campaign_BOM_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft Teams campaign BOM</h3>
+            </div>
+          </div>
+
+          <!-- video -->
+          <div class="carousel-card">
+            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175943835?h=4b31be1e4b&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/MSFT_cybersecurity_101_BOM_thumbnail.jpg')">
+              <div class="ph-overlay"></div>
+              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft Cybersecurity 101 BOM</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div class="carousel-card static-item">
+            <div class="img-wrap">
+              <img src="Static content/MSFT_Security_training _guide.jpg" alt="Microsoft Security Training Guide" loading="lazy" />
+              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+            </div>
+            <div class="card-meta">
+              <span class="card-client">Microsoft</span>
+              <h3 class="card-title">Microsoft Security Training Guide</h3>
+            </div>
+          </div>
+
+          <!-- static -->
+          <div a±…ÍÌô‰…É½ÕÍ•°µ…ÉÍÑ…Ñ¥Œµ¥Ñ•´ˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰¥µœµÝÉ…Àˆø(€€€€€€€€€€€€€€ñ¥µœÍÉŒô‰MÑ…Ñ¥Œ½¹Ñ•¹Ð½5MQ}9•Õ‘•Í¥}…Í•}ÍÑÕ‘ä¹©Áœˆ…±Ðô‰5¥É½Í½™Ð9•Õ‘•Í¥Œ…Í”MÑÕ‘äˆ±½…‘¥¹œô‰±…éäˆ€¼ø(€€€€€€€€€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰•áÁ…¹µ‰Ñ¸ˆ…É¥„µ±…‰•°ô‰Y¥•Ü™Õ±°Í¥é”ˆøñÍÙœÙ¥•Ý	½àôˆÀ€À€ÈÐ€ÈÐˆ™¥±°ô‰¹½¹”ˆÍÑÉ½­”ô‰ÕÉÉ•¹Ñ½±½ÈˆÍÑÉ½­”µÝ¥‘Ñ ôˆÈ¸ÔˆÝ¥‘Ñ ôˆÄàˆ¡•¥¡ÐôˆÄàˆøñ¥É±”àôˆÄÄˆäôˆÄÄˆÈôˆÜˆ¼øñÁ…Ñ ô‰´ÈÄ€ÈÄ´Ð¸ÌÔ´Ð¸ÌÔˆ¼øð½ÍÙœøð½‰ÕÑÑ½¸ø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…Éµµ•Ñ„ˆø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰…Éµ±¥•¹Ðˆù5¥É½Í½™Ð€™Ñ¥µ•Ìì9•Õ‘•Í¥Œð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñ Ì±…ÍÌô‰…ÉµÑ¥Ñ±”ˆù5¥É½Í½™Ð9•Õ‘•Í¥Œ…Í”MÑÕ‘äð½ Ìø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€€€ð„´´Ù¥‘•¼€´´ø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…É½ÕÍ•°µ…Éˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Ù¥‘•¼µÁ±…•¡½±‘•Èˆ‘…Ñ„µÍÉŒô‰¡ÑÑÁÌè¼½Á±…å•È¹Ù¥µ•¼¹½´½Ù¥‘•¼¼ÄÄÜÔäÐÈÐØØý ôÈÜÐÜØÍÑ„Ü™…ÕÑ½Á±…äôÄ™Ñ¥Ñ±”ôÀ™‰å±¥¹”ôÀ™Á½ÉÑÉ…¥ÐôÀ™½±½ÈõŒá„äÙ”ˆÍÑå±”ô‰‰…­É½Õ¹µ¥µ…”éÕÉ° Ñ¡Õµ‰¹…¥±Ì½1M}]M}ÁÕ‰Í•}	=5}Ñ¡Õµ‰¹…¥°¹©Áœœ¤ˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Á µ½Ù•É±…äˆøð½‘¥Øø(€€€€€€€€€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰Á±…äµ‰Ñ¸ˆ…É¥„µ±…‰•°ô‰A±…äÙ¥‘•¼ˆøñÍÙœÙ¥•Ý	½àôˆÀ€À€ÈÐ€ÈÐˆ™¥±°ô‰ÕÉÉ•¹Ñ½±½ÈˆÝ¥‘Ñ ôˆÈÈˆ¡•¥¡ÐôˆÈÈˆøñÁ…Ñ ô‰4à€ÕØÄÑ°ÄÄ´Ýèˆ¼øð½ÍÙœøð½‰ÕÑÑ½¸ø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…Éµµ•Ñ„ˆø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰…Éµ±¥•¹Ðˆù±…ÍÑ¥Œ€™Ñ¥µ•Ìì]Lð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñ Ì±…ÍÌô‰…ÉµÑ¥Ñ±”ˆù±…ÍÑ¥Œ]LAÕ‰±¥ŒM•Ñ½È	=4ð½ Ìø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€€€ð„´´Ù¥‘•¼€´´ø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…É½ÕÍ•°µ…Éˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Ù¥‘•¼µÁ±…•¡½±‘•Èˆ‘…Ñ„µÍÉŒô‰¡ÑÑÁÌè¼½Á±…å•È¹Ù¥µ•¼¹½´½Ù¥‘•¼¼ÄÄÜÔäÐÌÌÀÌý õ”Õ„àÅ‰…•ˆä™…ÕÑ½Á±…äôÄ™Ñ¥Ñ±”ôÀ™‰å±¥¹”ôÀ™Á½ÉÑÉ…¥ÐôÀ™½±½ÈõŒá„äÙ”ˆÍÑå±”ô‰‰…­É½Õ¹µ¥µ…”éÕÉ° Ñ¡Õµ‰¹…¥±Ì½!%Q}½Á¥±½Ñ}	=5}Ñ¡Õµ‰¹…¥°¹©Áœœ¤ˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Á µ½Ù•É±…äˆøð½‘¥Øø(€€€€€€€€€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰Á±…äµ‰Ñ¸ˆ…É¥„µ±…‰•°ô‰A±…äÙ¥‘•¼ˆøñÍÙœÙ¥•Ý	½àôˆÀ€À€ÈÐ€ÈÐˆ™¥±°ô‰ÕÉÉ•¹Ñ½±½ÈˆÝ¥‘Ñ ôˆÈÈˆ¡•¥¡ÐôˆÈÈˆøñÁ…Ñ ô‰4à€ÕØÄÑ°ÄÄ´Ýèˆ¼øð½ÍÙœøð½‰ÕÑÑ½¸ø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…Éµµ•Ñ„ˆø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰…Éµ±¥•¹Ðˆù!¥Ñ…¡¤M½±ÕÑ¥½¹Ìð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñ Ì±…ÍÌô‰…ÉµÑ¥Ñ±”ˆù!¥Ñ…¡¤M½±ÕÑ¥½¹Ì½Á¥±½Ð	=4ð½ Ìø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€€€ð„´´Ù¥‘•¼€´´ø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…É½ÕÍ•°µ…Éˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Ù¥‘•¼µÁ±…•¡½±‘•Èˆ‘…Ñ„µÍÉŒô‰¡ÑÑÁÌè¼½Á±…å•È¹Ù¥µ•¼¹½´½Ù¥‘•¼¼ÄÄÜÔäÐÌÈàäý ôÔÐÜÄÙ•…‰„À™…ÕÑ½Á±…äôÄ™Ñ¥Ñ±”ôÀ™‰å±¥¹”ôÀ™Á½ÉÑÉ…¥ÐôÀ™½±½ÈõŒá„äÙ”ˆÍÑå±”ô‰‰…­É½Õ¹µ¥µ…”éÕÉ° Ñ¡Õµ‰¹…¥±Ì½!%Q}™¥•±‘}Í•ÉÙ¥•}	=5}Ñ¡Õµ‰¹…¥°¹©Áœœ¤ˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Á µ½Ù•É±…äˆøð½‘¥Øø(€€€€€€€€€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰Á±…äµ‰Ñ¸ˆ…É¥„µ±…‰•°ô‰A±…äÙ¥‘•¼ˆøñÍÙœÙ¥•Ý	½àôˆÀ€À€ÈÐ€ÈÐˆ™¥±°ô‰ÕÉÉ•¹Ñ½±½ÈˆÝ¥‘Ñ ôˆÈÈˆ¡•¥¡ÐôˆÈÈˆøñÁ…Ñ ô‰4à€ÕØÄÑ°ÄÄ´Ýèˆ¼øð½ÍÙœøð½‰ÕÑÑ½¸ø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…Éµµ•Ñ„ˆø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰…Éµ±¥•¹Ðˆù!¥Ñ…¡¤M½±ÕÑ¥½¹Ìð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñ Ì±…ÍÌô‰…ÉµÑ¥Ñ±”ˆù!¥Ñ…¡¤M½±ÕÑ¥½¹Ì¥•±M•ÉÙ¥”	=4ð½ Ìø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€€€ð„´´ÍÑ…Ñ¥Œ€´´ø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…É½ÕÍ•°µ…ÉÍÑ…Ñ¥Œµ¥Ñ•´ˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰¥µœµÝÉ…Àˆø(€€€€€€€€€€€€€€ñ¥µœÍÉŒô‰MÑ…Ñ¥Œ½¹Ñ•¹Ð½MAA}áÁ•‘¥Ñ•}A±…Ñ™½Éµ}ÁÉ½µ¼¹©Áœˆ…±Ðô‰áÁ•‘¥Ñ”A±…Ñ™½É´AÉ½µ½Ñ¥½¹…°½¹Ñ•¹Ðˆ±½…‘¥¹œô‰±…éäˆ€¼ø(€€€€€€€€€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰•áÁ…¹µ‰Ñ¸ˆ…É¥„µ±…‰•°ô‰Y¥•Ü™Õ±°Í¥é”ˆøñÍÙœÙ¥•Ý	½àôˆÀ€À€ÈÐ€ÈÐˆ™¥±°ô‰¹½¹”ˆÍÑÉ½­”ô‰ÕÉÉ•¹Ñ½±½ÈˆÍÑÉ½­”µÝ¥‘Ñ ôˆÈ¸ÔˆÝ¥‘Ñ ôˆÄàˆ¡•¥¡ÐôˆÄàˆøñ¥É±”àôˆÄÄˆäôˆÄÄˆÈôˆÜˆ¼øñÁ…Ñ ô‰´ÈÄ€ÈÄ´Ð¸ÌÔ´Ð¸ÌÔˆ¼øð½ÍÙœøð½‰ÕÑÑ½¸ø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…Éµµ•Ñ„ˆø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰…Éµ±¥•¹ÐˆùM@ð½ÍÁ…¸ø(€€€€€€€€€€€€€€ñ Ì±…ÍÌô‰…ÉµÑ¥Ñ±”ˆùáÁ•‘¥Ñ”A±…Ñ™½É´AÉ½µ½Ñ¥½¹…°½¹Ñ•¹Ðð½ Ìø(€€€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ð½‘¥Øø((€€€€€€€€ð½‘¥Øøð„´´€½…µÁ…¥¹QÉ…¬€´´ø(€€€€€€ð½‘¥Øø(€€€€ð½‘¥Øø(€€€€ñ‘¥Ø±…ÍÌô‰…É½ÕÍ•°µ½¹ÑÉ½±Ìˆø(€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰…É½ÕÍ•°µ‰Ñ¸ˆ¥ô‰…µÁ…¥¹AÉ•Øˆ…É¥„µ±…‰•°ô‰AÉ•Ù¥½ÕÌˆø˜ŒàÔäÈìð½‰ÕÑÑ½¸ø(€€€€€€ñÍÁ…¸±…ÍÌô‰…É½ÕÍ•°µ½Õ¹Ñ•Èˆ¥ô‰…µÁ…¥¹½Õ¹Ñ•Èˆøð½ÍÁ…¸ø(€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰…É½ÕÍ•°µ‰Ñ¸ˆ¥ô‰…µÁ…¥¹9•áÐˆ…É¥„µ±…‰•°ô‰9•áÐˆø˜ŒàÔäÐìð½‰ÕÑÑ½¸ø(€€€€ð½‘¥Øø(((€€€€ð„´´ƒŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠV@(€€€€€€€€€ÀÐ€ƒ
+Ü€]€˜%%Q0(€€€ƒŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠV@€´´ø(€€€€ñ‘¥Ø±…ÍÌô‰Í•Ñ¥½¸µ‘¥Ù¥‘•Èˆøð½‘¥Øø((€€€€ñ‘¥Ø±…ÍÌô‰Ý½É¬µÍ•Ñ¥½¸ˆø(€€€€€€ñ‘¥Ø±…ÍÌô‰Í•Ñ¥½¸µ¡•…‘•Èˆø(€€€€€€€€ñÍÁ…¸±…ÍÌô‰Í•Ñ¥½¸µ±…‰•°ˆøÀÐð½ÍÁ…¸ø(€€€€€€€€ñ È±…ÍÌô‰Í•Ñ¥½¸µÑ¥Ñ±”ˆù]•ˆ€™…µÀì¥¥Ñ…°ð½ Èø(€€€€€€ð½‘¥Øø(€€€€€€ñ‘¥Ø±…ÍÌô‰É¥´Ìˆø((€€€€€€€€ñ‘¥Ø±…ÍÌô‰É¥µ…Éˆø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Ù¥‘•¼µÁ±…•¡½±‘•Èˆ‘…Ñ„µÍÉŒô‰¡ÑÑÁÌè¼½Á±…å•È¹Ù¥µ•¼¹½´½Ù¥‘•¼¼ÄÄÜÔäÐäÈÜÜý ôÈäÈÁ‰•™ˆÈÈ™…ÕÑ½Á±…äôÄ™Ñ¥Ñ±”ôÀ™‰å±¥¹”ôÀ™Á½ÉÑÉ…¥ÐôÀ™½±½ÈõŒá„äÙ”ˆÍÑå±”ô‰‰…­É½Õ¹µ¥µ…”éÕÉ° Ñ¡Õµ‰¹…¥±Ì½A9]}=Q}Ý•‰Á…•}Ñ¡Õµ‰¹…¥°¹©Áœœ¤ˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Á µ½Ù•É±…äˆøð½‘¥Øø(€€€€€€€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰Á±…äµ‰Ñ¸ˆ…É¥„µ±…‰•°ô‰A±…äÙ¥‘•¼ˆøñÍÙœÙ¥•Ý	½àôˆÀ€À€ÈÐ€ÈÐˆ™¥±°ô‰ÕÉÉ•¹Ñ½±½ÈˆÝ¥‘Ñ ôˆÈÈˆ¡•¥¡ÐôˆÈÈˆøñÁ…Ñ ô‰4à€ÕØÄÑ°ÄÄ´Ýèˆ¼øð½ÍÙœøð½‰ÕÑÑ½¸ø(€€€€€€€€€€ð½‘¥Øø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰…Éµµ•Ñ„ˆø(€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰…Éµ±¥•¹ÐˆùA…±¼±Ñ¼9•ÑÝ½É­Ìð½ÍÁ…¸ø(€€€€€€€€€€€€ñ Ì±…ÍÌô‰…ÉµÑ¥Ñ±”ˆùA…±¼±Ñ¼9•ÑÝ½É­Ì=PÝ•‰Á…”ð½ Ìø(€€€€€€€€€€ð½‘¥Øø(€€€€€€€€ð½‘¥Øø((€€€€€€€€ñ‘¥Ø±…ÍÌô‰É¥µ…Éˆø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰Ù¥‘•¼µÁ±…•¡½±‘•Èˆ‘…Ñ„µÍÉŒô‰¡ÑÑÁÌè¼½Á±…å•È¹Ù¥µ•¼¹½´½Ù¥‘•¼¼ÄÄÜÔäÐäÔÄÀý õ‘”ØÁ„ÐÍ˜ØÜ™…ÕÑ½Á±…äôÄ™Ñ¥Ñ±”ôÀ™‰å±¥¹”ôÀ™Á½ÉÑÉ…¥ÐôÀ™½±½ÈõŒá„äÙ”ˆÍÑå±”ô‰‰…­É½Õ¹µ¥µ…”éÕÉ° Ñ¡Õµ‰¹…¥±Ì½A9]validation_webpage_thumbnail.jpg')">
+            <div class="ph-overlay"></div>
+            <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+          </div>
+          <div class="card-meta">
+            <span class="card-client">Palo Alto Networks</span>
+            <h3 class="card-title">Palo Alto Networks Industry Validation webpage</h3>
+          </div>
+        </div>
+
+        <div class="grid-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175951778?h=44033bcba3&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VEEV_IT_trust_webpage_thumbnail.jpg')">
+            <div class="ph-overlay"></div>
+            <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+          </div>
+          <div class="card-meta">
+            <span class="card-client">Veeva</span>
+            <h3 class="card-title">Veeva IT Trust webpage</h3>
+          </div>
+        </div>
+
+        <div class="grid-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175951611?h=811edc2a59&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VEEV_website_thumbnail.jpg')">
+            <div class="ph-overlay"></div>
+            <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+          </div>
+          <div class="card-meta">
+            <span class="card-client">Veeva</span>
+            <h3 class="card-title">Veeva corporate website redesign</h3>
+          </div>
+        </div>
+
+        <div class="grid-card">
+          <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175951659?h=6d6e3f2ea4&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/VEEV_CP_infographic_thumbnail.jpg')">
+            <div class="ph-overlay"></div>
+            <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+          </div>
+          <div class="card-meta">
+            <span class="card-client">Veeva</span>
+            <h3 class="card-title">Veeva Consumer Products interactive infographic</h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- â•â• LIGHTBOX â•â• -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-box" id="lightboxBox">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+      <div class="lightbox-caption">
+        <div>
+          <div class="lightbox-client" id="lightboxClient"></div>
+          <div class="lightbox-title" id="lightboxTitle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // â”€â”€ Click-to-play videos â”€â”€
+  document.querySelectorAll('.video-placeholder').forEach(function(el) {
+    el.addEventListener('click', function() {
+      window._stopAll && window._stopAll();
+      var wrap = document.createElement('div');
+      wrap.className = 'video-active';
+      var iframe = document.createElement('iframe');
+      iframe.src = el.dataset.src;
+      iframe.setAttribute('frameborder','0');
+      iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+      iframe.setAttribute('allowfullscreen','');
+      iframe.addEventListener('load', function() {
+        iframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'pause'}), 'https://player.vimeo.com');
+        iframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'ended'}), 'https://player.vimeo.com');
+      });
+      wrap.appendChild(iframe);
+      el.replaceWith(wrap);
+    });
+  });
+
+  // â”€â”€ Carousel factory â”€â”€
+  function makeCarousel(trackId, prevId, nextId, counterId) {
+    var track   = document.getElementById(trackId);
+    var prev    = document.getElementById(prevId);
+    var next    = document.getElementById(nextId);
+    var counter = document.getElementById(counterId);
+    var cards   = Array.from(track.querySelectorAll('.carousel-card'));
+    var total   = cards.length;
+    var visible = 3;
+    var cur     = 0;
+    var timer   = null;
+
+    function cw() { return cards[0].offsetWidth + 24; }
+    function update() {
+      track.style.transform = 'translateX(-' + (cur * cw()) + 'px)';
+      counter.innerHTML = (cur + 1) + '&ndash;' + Math.min(cur + visible, total) + ' of ' + total;
+      prev.disabled = cur === 0;
+      next.disabled = cur >= total - visible;
+    }
+    function start() {
+      clearInterval(timer);
+      timer = setInterval(function() {
+        if (cur >= total - visible) { cur = 0; } else { cur++; }
+        update();
+      }, 4000);
+    }
+    function stop() { clearInterval(timer); }
+
+    prev.addEventListener('click', function() { if (cur > 0) { cur--; update(); } });
+    next.addEventListener('click', function() { if (cur < total - visible) { cur++; update(); } });
+    update();
+    return { start: start, stop: stop };
+  }
+
+  var c1 = makeCarousel('ebookTrack',    'ebookPrev',    'ebookNext',    'ebookCounter');
+  var c2 = makeCarousel('reportTrack',   'reportPrev',   'reportNext',   'reportCounter');
+  var c3 = makeCarousel('campaignTrack', 'campaignPrev', 'campaignNext', 'campaignCounter');
+
+  // c1 and c2 auto-advance; c3 (Campaigns) is browse-only â€” no auto-advance
+  c1.start(); c2.start();
+
+  window._stopAll  = function() { c1.stop();  c2.stop();  c3.stop();  };
+  window._startAll = function() { c1.start(); c2.start(); }; // c3 never auto-advances
+
+  // â”€â”€ Resume c1/c2 only when a Vimeo video actually finishes (not on spurious pause events) â”€â”€
+  window.addEventListener('message', function(e) {
+    if (e.origin !== 'https://player.vimeo.com') return;
+    try {
+      var d = JSON.parse(e.data);
+      if (d.event === 'ended') { window._startAll(); }
+    } catch(err) {}
+  });
+
+  // â”€â”€ Lightbox for static images â”€â”€
+  (function() {
+    var overlay  = document.getElementById('lightbox');
+    var img      = document.getElementById('lightboxImg');
+    var titleEl  = document.getElementById('lightboxTitle');
+    var clientEl = document.getElementById('lightboxClient');
+    var closeBtn = document.getElementById('lightboxClose');
+
+    function open(card) {
+      var thumb  = card.querySelector('.img-wrap img');
+      var ttl    = card.querySelector('.card-title');
+      var clt    = card.querySelector('.card-client');
+      if (!thumb) return;
+      img.src            = thumb.src;
+      img.alt            = ttl ? ttl.textContent : '';
+      titleEl.textContent  = ttl ? ttl.textContent : '';
+      clientEl.textContent = clt ? clt.textContent : '';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      img.src = '';
+    }
+
+    document.querySelectorAll('.static-item').forEach(function(card) {
+      card.addEventListener('click', function() { open(card); });
+    });
+
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  })();
+  </script>
+
+</body>
+</html>
