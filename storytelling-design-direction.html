@@ -66,23 +66,15 @@
 
     .section-divider{display:none;}
 
-    /* ── flipbook lightbox ── */
-    .flipbook-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(12,11,9,.95);align-items:center;justify-content:center;flex-direction:column;gap:1.25rem;}
-    .flipbook-overlay.open{display:flex;}
-    .flipbook-container{display:flex;align-items:center;gap:1.5rem;}
-    .flipbook-stage{perspective:1200px;display:flex;align-items:center;justify-content:center;}
-    .flipbook-img{max-width:min(820px,78vw);max-height:72vh;width:auto;height:auto;display:block;border:1px solid rgba(212,205,192,.15);box-shadow:0 20px 60px rgba(0,0,0,.7);}
-    .flipbook-img.flip-fwd{animation:flipFwd .45s ease-in-out;}
-    .flipbook-img.flip-back{animation:flipBack .45s ease-in-out;}
-    @keyframes flipFwd{0%{transform:perspective(1200px) rotateY(0);opacity:1;}45%{transform:perspective(1200px) rotateY(-90deg);opacity:0;}55%{transform:perspective(1200px) rotateY(90deg);opacity:0;}100%{transform:perspective(1200px) rotateY(0);opacity:1;}}
-    @keyframes flipBack{0%{transform:perspective(1200px) rotateY(0);opacity:1;}45%{transform:perspective(1200px) rotateY(90deg);opacity:0;}55%{transform:perspective(1200px) rotateY(-90deg);opacity:0;}100%{transform:perspective(1200px) rotateY(0);opacity:1;}}
-    .flipbook-nav{width:3rem;height:3rem;border:1px solid rgba(212,205,192,.3);background:transparent;color:var(--paper);font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;}
-    .flipbook-nav:hover{background:rgba(200,169,110,.25);}
-    .flipbook-nav:disabled{opacity:.25;cursor:default;}
-    .flipbook-counter{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,240,232,.5);}
-    .flipbook-close{position:fixed;top:1.5rem;right:1.5rem;width:2.5rem;height:2.5rem;border-radius:50%;background:var(--ink);border:1px solid rgba(212,205,192,.3);color:var(--paper);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:10;}
-    .flipbook-close:hover{background:var(--accent);color:var(--ink);}
-    .cie-trigger{cursor:pointer;}
+    /* ── CIE auto-slideshow ── */
+    .cie-slideshow{position:relative;border:1px solid var(--rule);overflow:hidden;max-width:900px;}
+    .cie-slide-wrap{position:relative;width:100%;overflow:hidden;background:var(--ink);}
+    .cie-slide-img{width:100%;display:block;transition:opacity .7s ease;}
+    .cie-slide-img.fading{opacity:0;}
+    .cie-slide-meta{display:flex;justify-content:space-between;align-items:center;padding:.65rem 1rem;border-top:1px solid var(--rule);}
+    .cie-slide-client{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);}
+    .cie-slide-counter{font-size:.65rem;letter-spacing:.1em;color:rgba(244,240,232,.4);}
+    .cie-progress-bar{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0%;transition:width linear;}
   </style>
 </head>
 <body>
@@ -271,20 +263,14 @@
         <span class="section-label">03</span>
         <h2 class="section-title">Customer Immersion Programs</h2>
       </div>
-      <div class="grid-2">
-        <div class="grid-card cie-trigger static-item" id="openFlipbook">
-          <div class="img-wrap">
-            <img src="cie_pages/page-01.jpg" alt="Microsoft CIE Field Guide" loading="lazy" />
-            <button class="expand-btn" aria-label="Open field guide">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-              </svg>
-            </button>
-          </div>
-          <div class="card-meta">
-            <span class="card-client">Microsoft</span>
-            <h3 class="card-title">Microsoft CIE Field Guide — Click to read</h3>
-          </div>
+      <div class="cie-slideshow" id="cieSlideshow">
+        <div class="cie-slide-wrap">
+          <img id="cieSlideImg" class="cie-slide-img" src="cie_pages/page-01.jpg" alt="CIE Field Guide page" />
+          <div class="cie-progress-bar" id="cieProgress"></div>
+        </div>
+        <div class="cie-slide-meta">
+          <span class="cie-slide-client">Microsoft — CIE Field Guide</span>
+          <span class="cie-slide-counter" id="cieCounter">1 / 12</span>
         </div>
       </div>
     </div>
@@ -355,18 +341,7 @@
   </main>
 
 
-  <!-- FLIPBOOK OVERLAY -->
-  <div id="flipbookOverlay" class="flipbook-overlay">
-    <button class="flipbook-close" id="flipbookClose">&#215;</button>
-    <div class="flipbook-container">
-      <button class="flipbook-nav" id="flipPrev">&#8592;</button>
-      <div class="flipbook-stage">
-        <img id="flipbookImg" class="flipbook-img" src="" alt="CIE Field Guide" />
-      </div>
-      <button class="flipbook-nav" id="flipNext">&#8594;</button>
-    </div>
-    <div class="flipbook-counter" id="flipCounter">Page 1 of 12</div>
-  </div>
+
 
   <script>
   // Click-to-play for all video placeholders
@@ -440,7 +415,7 @@
     } catch(err) {}
   });
 
-  // ── Flipbook ──
+  // ── CIE Auto-Slideshow ──
   (function() {
     var pages = [
       'cie_pages/page-01.jpg','cie_pages/page-02.jpg','cie_pages/page-03.jpg',
@@ -448,48 +423,73 @@
       'cie_pages/page-07.jpg','cie_pages/page-08.jpg','cie_pages/page-09.jpg',
       'cie_pages/page-10.jpg','cie_pages/page-11.jpg','cie_pages/page-12.jpg'
     ];
+    var INTERVAL = 3200;   // ms per slide
+    var FADE     = 700;    // ms fade duration (match CSS .7s)
     var cur = 0;
-    var overlay  = document.getElementById('flipbookOverlay');
-    var img      = document.getElementById('flipbookImg');
-    var counter  = document.getElementById('flipCounter');
-    var prevBtn  = document.getElementById('flipPrev');
-    var nextBtn  = document.getElementById('flipNext');
-    var closeBtn = document.getElementById('flipbookClose');
+    var timer = null;
+    var progressTimer = null;
+    var img      = document.getElementById('cieSlideImg');
+    var counter  = document.getElementById('cieCounter');
+    var progress = document.getElementById('cieProgress');
+    var section  = document.getElementById('cieSlideshow');
+
+    // Preload all pages
+    pages.forEach(function(src) { var i = new Image(); i.src = src; });
 
     function updateCounter() {
-      counter.textContent = 'Page ' + (cur + 1) + ' of ' + pages.length;
-      prevBtn.disabled = cur === 0;
-      nextBtn.disabled = cur === pages.length - 1;
+      counter.textContent = (cur + 1) + ' / ' + pages.length;
     }
 
-    function goTo(n, dir) {
-      if (n < 0 || n >= pages.length) return;
-      var cls = dir === 'fwd' ? 'flip-fwd' : 'flip-back';
-      img.classList.add(cls);
-      setTimeout(function() { img.src = pages[n]; cur = n; updateCounter(); }, 220);
-      setTimeout(function() { img.classList.remove(cls); }, 460);
+    function advanceTo(n) {
+      var next = (n + pages.length) % pages.length;
+      img.classList.add('fading');
+      setTimeout(function() {
+        img.src = pages[next];
+        cur = next;
+        updateCounter();
+        img.classList.remove('fading');
+      }, FADE);
     }
 
-    document.getElementById('openFlipbook').addEventListener('click', function() {
-      cur = 0;
-      img.src = pages[0];
+    function startProgress() {
+      // Reset bar instantly, then animate across INTERVAL ms
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+      // Force reflow so the reset takes effect before re-enabling transition
+      void progress.offsetWidth;
+      progress.style.transition = 'width ' + INTERVAL + 'ms linear';
+      progress.style.width = '100%';
+    }
+
+    function startSlideshow() {
+      if (timer) return;
       updateCounter();
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
+      startProgress();
+      timer = setInterval(function() {
+        advanceTo(cur + 1);
+        startProgress();
+      }, INTERVAL);
+    }
 
-    nextBtn.addEventListener('click', function() { goTo(cur + 1, 'fwd'); });
-    prevBtn.addEventListener('click', function() { goTo(cur - 1, 'back'); });
+    function stopSlideshow() {
+      if (timer) { clearInterval(timer); timer = null; }
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+    }
 
-    function close() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
-    closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', function(e) { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', function(e) {
-      if (!overlay.classList.contains('open')) return;
-      if (e.key === 'ArrowRight') goTo(cur + 1, 'fwd');
-      if (e.key === 'ArrowLeft')  goTo(cur - 1, 'back');
-      if (e.key === 'Escape')     close();
-    });
+    // Start/stop based on scroll visibility
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { startSlideshow(); }
+          else { stopSlideshow(); }
+        });
+      }, { threshold: 0.35 });
+      obs.observe(section);
+    } else {
+      // Fallback: just start immediately
+      startSlideshow();
+    }
   })();
   </script>
 
