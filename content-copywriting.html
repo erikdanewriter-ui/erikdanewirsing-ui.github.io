@@ -72,6 +72,15 @@
 
     .section-divider{display:none;}
 
+    /* ── bento grid (customer stories) ── */
+    .bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0 3rem;}
+    .bento-card{border:1px solid var(--rule);min-width:0;}
+    .bento-card.wide{grid-column:span 2;}
+    .bento-card .card-meta{border:0;border-top:1px solid var(--rule);}
+    .bento-card .img-wrap,.bento-card .video-placeholder,.bento-card .video-active{border-radius:0;}
+    @media(max-width:900px){.bento-card.wide{grid-column:span 1;}.bento-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:580px){.bento-grid{grid-template-columns:1fr;padding-left:1.5rem;padding-right:1.5rem;}}
+
     /* ── lightbox ── */
     .lightbox-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(12,11,9,.92);align-items:center;justify-content:center;padding:2rem;}
     .lightbox-overlay.open{display:flex;}
@@ -413,54 +422,6 @@
 
           <!-- video -->
           <div class="carousel-card">
-            <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175948612?h=34f9bd4c8a&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_customer_advocacy_program_thumbnail.jpg')">
-              <div class="ph-overlay"></div>
-              <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
-            </div>
-            <div class="card-meta">
-              <span class="card-client">Palo Alto Networks</span>
-              <h3 class="card-title">Palo Alto Networks Customer Advocacy Program</h3>
-            </div>
-          </div>
-
-          <!-- static -->
-          <div class="carousel-card static-item">
-            <div class="img-wrap">
-              <img src="Static content/PANW_case-study_program.jpg" alt="Palo Alto Networks Case Study Program" loading="lazy" />
-              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
-            </div>
-            <div class="card-meta">
-              <span class="card-client">Palo Alto Networks</span>
-              <h3 class="card-title">Palo Alto Networks Case Study Program</h3>
-            </div>
-          </div>
-
-          <!-- static -->
-          <div class="carousel-card static-item">
-            <div class="img-wrap">
-              <img src="Static content/PANW_case-studies.jpg" alt="Palo Alto Networks Case Studies" loading="lazy" />
-              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
-            </div>
-            <div class="card-meta">
-              <span class="card-client">Palo Alto Networks</span>
-              <h3 class="card-title">Palo Alto Networks Case Studies</h3>
-            </div>
-          </div>
-
-          <!-- static -->
-          <div class="carousel-card static-item">
-            <div class="img-wrap">
-              <img src="Static content/PANW_case_studies.jpg" alt="Palo Alto Networks Case Studies Collection" loading="lazy" />
-              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
-            </div>
-            <div class="card-meta">
-              <span class="card-client">Palo Alto Networks</span>
-              <h3 class="card-title">Palo Alto Networks Case Studies Collection</h3>
-            </div>
-          </div>
-
-          <!-- video -->
-          <div class="carousel-card">
             <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175949474?h=36b81b6654&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_SASE_campaign_thumbnail.jpg')">
               <div class="ph-overlay"></div>
               <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
@@ -495,18 +456,6 @@
             </div>
           </div>
 
-          <!-- static -->
-          <div class="carousel-card static-item">
-            <div class="img-wrap">
-              <img src="Static content/ATLA_use_cases.jpg" alt="Atlassian Use Cases" loading="lazy" />
-              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
-            </div>
-            <div class="card-meta">
-              <span class="card-client">Atlassian</span>
-              <h3 class="card-title">Atlassian Use Cases</h3>
-            </div>
-          </div>
-
           <!-- video -->
           <div class="carousel-card">
             <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175940272?h=34806ebc77&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/ATLA_champion_packs_thumbnail.jpg')">
@@ -528,18 +477,6 @@
             <div class="card-meta">
               <span class="card-client">Amazon Web Services</span>
               <h3 class="card-title">AWS Federal Messaging Guides</h3>
-            </div>
-          </div>
-
-          <!-- static -->
-          <div class="carousel-card static-item">
-            <div class="img-wrap">
-              <img src="Static content/AWS_case_study.jpg" alt="AWS Case Study" loading="lazy" />
-              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
-            </div>
-            <div class="card-meta">
-              <span class="card-client">Amazon Web Services</span>
-              <h3 class="card-title">AWS Case Study</h3>
             </div>
           </div>
 
@@ -588,18 +525,6 @@
             <div class="card-meta">
               <span class="card-client">Microsoft</span>
               <h3 class="card-title">Microsoft Security Training Guide</h3>
-            </div>
-          </div>
-
-          <!-- static -->
-          <div class="carousel-card static-item">
-            <div class="img-wrap">
-              <img src="Static content/MSFT_Neudesic_case_study.jpg" alt="Microsoft Neudesic Case Study" loading="lazy" />
-              <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
-            </div>
-            <div class="card-meta">
-              <span class="card-client">Microsoft &times; Neudesic</span>
-              <h3 class="card-title">Microsoft Neudesic Case Study</h3>
             </div>
           </div>
 
@@ -661,14 +586,115 @@
     </div>
 
 
+
+
     <!-- ══════════════════════════════════════════
-         04  ·  WEB & DIGITAL
+         04  ·  CUSTOMER STORIES & CASE STUDIES
+    ══════════════════════════════════════════ -->
+
+    <div class="work-section">
+      <div class="section-header">
+        <span class="section-label">04</span>
+        <h2 class="section-title">Customer Stories &amp; Case Studies</h2>
+      </div>
+    </div>
+
+    <div class="bento-grid">
+
+      <!-- wide: video -->
+      <div class="bento-card wide">
+        <div class="video-placeholder" data-src="https://player.vimeo.com/video/1175948612?h=34f9bd4c8a&autoplay=1&title=0&byline=0&portrait=0&color=c8a96e" style="background-image:url('thumbnails/PANW_customer_advocacy_program_thumbnail.jpg')">
+          <div class="ph-overlay"></div>
+          <button class="play-btn" aria-label="Play video"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Palo Alto Networks</span>
+          <h3 class="card-title">Palo Alto Networks Customer Advocacy Program</h3>
+        </div>
+      </div>
+
+      <!-- regular: static -->
+      <div class="bento-card static-item">
+        <div class="img-wrap">
+          <img src="Static content/PANW_case-study_program.jpg" alt="Palo Alto Networks Case Study Program" loading="lazy" />
+          <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Palo Alto Networks</span>
+          <h3 class="card-title">Palo Alto Networks Case Study Program</h3>
+        </div>
+      </div>
+
+      <!-- regular: static -->
+      <div class="bento-card static-item">
+        <div class="img-wrap">
+          <img src="Static content/PANW_case-studies.jpg" alt="Palo Alto Networks Case Studies" loading="lazy" />
+          <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Palo Alto Networks</span>
+          <h3 class="card-title">Palo Alto Networks Case Studies</h3>
+        </div>
+      </div>
+
+      <!-- regular: static -->
+      <div class="bento-card static-item">
+        <div class="img-wrap">
+          <img src="Static content/PANW_case_studies.jpg" alt="Palo Alto Networks Case Studies Collection" loading="lazy" />
+          <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Palo Alto Networks</span>
+          <h3 class="card-title">Palo Alto Networks Case Studies Collection</h3>
+        </div>
+      </div>
+
+      <!-- regular: static -->
+      <div class="bento-card static-item">
+        <div class="img-wrap">
+          <img src="Static content/ATLA_use_cases.jpg" alt="Atlassian Use Cases" loading="lazy" />
+          <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Atlassian</span>
+          <h3 class="card-title">Atlassian Use Cases</h3>
+        </div>
+      </div>
+
+      <!-- wide: static -->
+      <div class="bento-card wide static-item">
+        <div class="img-wrap">
+          <img src="Static content/AWS_case_study.jpg" alt="Meta AWS Case Study" loading="lazy" />
+          <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Amazon Web Services</span>
+          <h3 class="card-title">Meta AWS Case Study</h3>
+        </div>
+      </div>
+
+      <!-- regular: static -->
+      <div class="bento-card static-item">
+        <div class="img-wrap">
+          <img src="Static content/MSFT_Neudesic_case_study.jpg" alt="Microsoft Neudesic Case Study" loading="lazy" />
+          <button class="expand-btn" aria-label="View full size"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </div>
+        <div class="card-meta">
+          <span class="card-client">Microsoft &times; Neudesic</span>
+          <h3 class="card-title">Microsoft Neudesic Case Study</h3>
+        </div>
+      </div>
+
+    </div><!-- /bento-grid -->
+
+    <!-- ══════════════════════════════════════════
+         05  ·  WEB & DIGITAL
     ══════════════════════════════════════════ -->
     <div class="section-divider"></div>
 
     <div class="work-section">
       <div class="section-header">
-        <span class="section-label">04</span>
+        <span class="section-label">05</span>
         <h2 class="section-title">Web &amp; Digital</h2>
       </div>
       <div class="grid-3">
