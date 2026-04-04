@@ -73,11 +73,16 @@
     .section-divider{display:none;}
 
     /* ── bento grid (customer stories) ── */
-    .bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0 3rem;}
+    .bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;padding:0 3rem;}
     .bento-card{border:1px solid var(--rule);min-width:0;}
     .bento-card.wide{grid-column:span 2;}
-    .bento-card .card-meta{border:0;border-top:1px solid var(--rule);}
-    .bento-card .img-wrap,.bento-card .video-placeholder,.bento-card .video-active{border-radius:0;}
+    .bento-card .card-meta{border:0;border-top:1px solid var(--rule);padding:.6rem .85rem .75rem;}
+    .bento-card .card-title{font-size:.88rem;}
+    /* Override aspect-ratio hack — use fixed compact heights */
+    .bento-card .img-wrap{padding-bottom:0;height:130px;}
+    .bento-card.wide .img-wrap{height:130px;}
+    .bento-card .video-placeholder{padding-bottom:0;height:130px;}
+    .bento-card.wide .video-placeholder{height:130px;}
     @media(max-width:900px){.bento-card.wide{grid-column:span 1;}.bento-grid{grid-template-columns:repeat(2,1fr);}}
     @media(max-width:580px){.bento-grid{grid-template-columns:1fr;padding-left:1.5rem;padding-right:1.5rem;}}
 
